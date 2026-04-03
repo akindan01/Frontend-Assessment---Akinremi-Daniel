@@ -3,7 +3,7 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install --legacy-peer-deps",
   "env": {
-    "NEXT_PUBLIC_TMDB_API_KEY": "@tmdb_api_key",
+    "NEXT_PUBLIC_TMDB_API_KEY": "673f34a204f17d66070a2c1b73818bb7",
     "NEXT_PUBLIC_TMDB_BASE_URL": "https://api.themoviedb.org/3",
     "NEXT_PUBLIC_TMDB_IMAGE_BASE_URL": "https://image.tmdb.org/t/p/w500"
   },
