@@ -2,7 +2,7 @@
 
 CineX is a premium, Netflix-inspired movie discovery platform built with **Next.js 16**, **TypeScript**, and **Tailwind CSS**. It leverages the **The Movie Database (TMDB)** API to provide a seamless browsing and search experience for movie enthusiasts.
 
-## 🚀 Quick Start
+##  Quick Start
 
 Follow these 4 steps to get the project running locally:
 
@@ -33,7 +33,7 @@ Follow these 4 steps to get the project running locally:
 
 ---
 
-## 🏗️ Architecture & Decisions
+##  Architecture & Decisions
 
 ### **1. Deployment Strategy: Why Vercel?**
 While Cloudflare Workers is a powerful platform, **Vercel** was chosen for this project for the following technical reasons:
@@ -53,7 +53,7 @@ All search, filtering, and pagination states are synchronized with the **URL par
 
 ---
 
-## ⚡ Performance Optimizations
+##  Performance Optimizations
 
 CineX is optimized for **Core Web Vitals**, targeting a Lighthouse Performance score of 90+.
 
@@ -68,7 +68,7 @@ CineX is optimized for **Core Web Vitals**, targeting a Lighthouse Performance s
 
 ---
 
-## ✅ Mandatory Features (Rubric Compliance)
+##  Mandatory Features (Rubric Compliance)
 
 *   **F-1 Listing Page**: SSR-rendered grid with 20 items per page. Responsive layout (1 col mobile, 3-5 col desktop).
 *   **F-2 Detail Page**: Dynamic route `/movies/[id]` with full metadata, dynamic SEO (OG images), and breadcrumb navigation.
@@ -78,7 +78,7 @@ CineX is optimized for **Core Web Vitals**, targeting a Lighthouse Performance s
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 The project includes unit tests for critical UI components and logic using **Vitest** and **React Testing Library**.
 *   `MovieCard.test.tsx`: Verifies metadata rendering, link generation, and image fallback behavior.
@@ -88,7 +88,7 @@ Run tests with: `npm run test:run`
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 *   **Framework**: Next.js 16 (App Router)
 *   **Styling**: Tailwind CSS v4 (Vanilla CSS variables)
 *   **Icons**: Lucide React (Professional SVG icons)
