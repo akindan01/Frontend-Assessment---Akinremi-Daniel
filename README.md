@@ -2,7 +2,7 @@
 
 CineX is a premium, Netflix-inspired movie discovery platform built with **Next.js 16**, **TypeScript**, and **Tailwind CSS**. It leverages the **The Movie Database (TMDB)** API to provide a seamless browsing and search experience for movie enthusiasts.
 
-## 🚀 Quick Start
+##  Quick Start
 
 Follow these 4 steps to get the project running locally:
 
@@ -33,7 +33,7 @@ Follow these 4 steps to get the project running locally:
 
 ---
 
-## 🏗️ Architecture & Decisions
+##  Architecture & Decisions
 
 ### **1. Deployment Strategy: Why Vercel?**
 While Cloudflare Workers is a powerful platform, **Vercel** was chosen for this project for the following technical reasons:
@@ -53,7 +53,7 @@ All search, filtering, and pagination states are synchronized with the **URL par
 
 ---
 
-## ⚡ Performance Optimizations
+##  Performance Optimizations
 
 CineX is optimized for **Core Web Vitals**, targeting a Lighthouse Performance score of 90+.
 
@@ -68,7 +68,7 @@ CineX is optimized for **Core Web Vitals**, targeting a Lighthouse Performance s
 
 ---
 
-## ✅ Mandatory Features (Rubric Compliance)
+##  Mandatory Features (Rubric Compliance)
 
 *   **F-1 Listing Page**: SSR-rendered grid with 20 items per page. Responsive layout (1 col mobile, 3-5 col desktop).
 *   **F-2 Detail Page**: Dynamic route `/movies/[id]` with full metadata, dynamic SEO (OG images), and breadcrumb navigation.
@@ -78,7 +78,7 @@ CineX is optimized for **Core Web Vitals**, targeting a Lighthouse Performance s
 
 ---
 
-## 🐛 Known Issues & Solutions
+##  Known Issues & Solutions
 
 During development and deployment, the following issues were encountered and resolved:
 
@@ -94,19 +94,18 @@ During development and deployment, the following issues were encountered and res
 
 **Solution**: Updated `vercel.json` to use the actual API key value instead of a secret reference, since `NEXT_PUBLIC_` variables are meant to be public.
 
-**Lesson**: When deploying to Vercel, avoid using `@secret_name` references unless the secret is explicitly created in Vercel's Secrets Management panel.
 
 ### **Issue 2: Environment Variables Not Injected on Vercel**
 **Problem**: API calls failed despite setting environment variables in Vercel dashboard.
 
 **Solution**: Ensure environment variables are set in **Vercel Project Settings → Environment Variables**, not just in `.env.local`. For Vercel deployments:
-1. Remove hardcoded values from `vercel.json`
+1. I Removed hardcoded values from `vercel.json`
 2. Set variables via Vercel Dashboard (Settings → Environment Variables)
 3. Redeploy after changes
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 The project includes unit tests for critical UI components and logic using **Vitest** and **React Testing Library**.
 *   `MovieCard.test.tsx`: Verifies metadata rendering, link generation, and image fallback behavior.
@@ -116,7 +115,7 @@ Run tests with: `npm run test:run`
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 *   **Framework**: Next.js 16 (App Router)
 *   **Styling**: Tailwind CSS v4 (Vanilla CSS variables)
 *   **Icons**: Lucide React (Professional SVG icons)
