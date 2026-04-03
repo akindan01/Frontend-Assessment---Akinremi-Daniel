@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CineX — Content Explorer
 
-## Getting Started
+CineX is a premium, Netflix-inspired movie discovery platform built with **Next.js 16**, **TypeScript**, and **Tailwind CSS**. It leverages the **The Movie Database (TMDB)** API to provide a seamless browsing and search experience for movie enthusiasts.
 
-First, run the development server:
+## 🚀 Quick Start
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Follow these 4 steps to get the project running locally:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **Clone & Enter**:
+   ```bash
+   git clone <repository-url>
+   cd content-explorer
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. **Install Dependencies**:
+   ```bash
+   npm install --legacy-peer-deps
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Configure Environment**:
+   Create a `.env.local` file in the root and add your TMDB API Key:
+   ```env
+   NEXT_PUBLIC_TMDB_API_KEY=your_api_key_here
+   NEXT_PUBLIC_TMDB_BASE_URL=https://api.themoviedb.org/3
+   NEXT_PUBLIC_TMDB_IMAGE_BASE_URL=https://image.tmdb.org/t/p/w500
+   ```
 
-## Learn More
+4. **Launch**:
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🏗️ Architecture & Decisions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### **1. Deployment Strategy: Why Vercel?**
+While Cloudflare Workers is a powerful platform, **Vercel** was chosen for this project for the following technical reasons:
+*   **Native Next.js Support**: As the creators of Next.js, Vercel provides day-zero support for all features, including **Turbopack** and advanced **App Router** caching, without needing the complex adapters (like OpenNext) required for Cloudflare.
+*   **Built-in Image Optimization**: Vercel handles `next/image` optimization out-of-the-box, ensuring that large TMDB posters and backdrops are automatically resized and served in modern formats (WebP/AVIF) at the edge.
+*   **Simplified CI/CD for Next.js 16**: Vercel's build pipeline is specifically tuned for Next.js, handling Environment Variables and Edge Middleware with zero configuration.
 
-## Deploy on Vercel
+### **2. Feature-Based Structure**
+The project follows a modular architecture:
+*   `app/lib/api.ts`: Centralized API abstraction layer. Components do not call `fetch` directly.
+*   `app/components/`: Reusable UI components (MovieCard, SearchInput, Pagination).
+*   `app/types/`: Shared TypeScript interfaces ensuring type safety across the app.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### **3. URL-Driven State Management**
+All search, filtering, and pagination states are synchronized with the **URL parameters** (`query`, `page`). 
+*   **Decision**: This ensures that search results are fully shareable and that the user's position is maintained after a browser refresh or "Back" navigation.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## ⚡ Performance Optimizations
+
+CineX is optimized for **Core Web Vitals**, targeting a Lighthouse Performance score of 90+.
+
+1.  **LCP Optimization**: 
+    *   The Hero backdrop on the movie detail page and the top-row movie posters use `priority={true}` and `loading="eager"` to ensure the Largest Contentful Paint occurs as early as possible.
+2.  **Zero-CLS Font Loading**: 
+    *   Implemented via `next/font/local`. By bundling the **Geist** font files locally, we eliminate external network requests to Google Fonts and prevent Cumulative Layout Shift (CLS) during font swapping.
+3.  **Intelligent Caching**: 
+    *   Native `fetch` is used with `next: { revalidate: 3600 }` (1 hour) to cache API responses on the server, significantly reducing latency for subsequent requests.
+4.  **Debounced Search**: 
+    *   Search input uses a custom **400ms debounce** hook and React 19's `useTransition` to prevent unnecessary API spam while keeping the UI responsive.
+
+---
+
+## ✅ Mandatory Features (Rubric Compliance)
+
+*   **F-1 Listing Page**: SSR-rendered grid with 20 items per page. Responsive layout (1 col mobile, 3-5 col desktop).
+*   **F-2 Detail Page**: Dynamic route `/movies/[id]` with full metadata, dynamic SEO (OG images), and breadcrumb navigation.
+*   **F-3 Search & Filtering**: URL-driven search with debounce and real-time UI feedback.
+*   **F-4 States**: Shimmer skeleton loaders (`app/loading.tsx`), actionable `error.tsx` boundaries, and a dedicated "No Results found" UI.
+*   **F-5 Deployment**: Fully optimized and ready for production on Vercel.
+
+---
+
+## 🧪 Testing
+
+The project includes unit tests for critical UI components and logic using **Vitest** and **React Testing Library**.
+*   `MovieCard.test.tsx`: Verifies metadata rendering, link generation, and image fallback behavior.
+*   `useDebounce.test.ts`: Ensures correct timing of debounced value updates.
+
+Run tests with: `npm run test:run`
+
+---
+
+## 🛠️ Tech Stack
+*   **Framework**: Next.js 16 (App Router)
+*   **Styling**: Tailwind CSS v4 (Vanilla CSS variables)
+*   **Icons**: Lucide React (Professional SVG icons)
+*   **Testing**: Vitest + React Testing Library
+*   **Data**: TMDB API
+
+---
+
+*Built for the Content Explorer Assessment.*
