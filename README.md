@@ -78,6 +78,34 @@ CineX is optimized for **Core Web Vitals**, targeting a Lighthouse Performance s
 
 ---
 
+## 🐛 Known Issues & Solutions
+
+During development and deployment, the following issues were encountered and resolved:
+
+### **Issue 1: Vercel Environment Variable Secret Reference Error**
+**Problem**: Deployment failed with error `NEXT_PUBLIC_TMDB_API_KEY references Secret "tmdb_api_key", which does not exist`.
+
+**Root Cause**: The `vercel.json` file contained a reference to a non-existent Vercel Secret:
+```json
+"env": {
+  "NEXT_PUBLIC_TMDB_API_KEY": "@tmdb_api_key"
+}
+```
+
+**Solution**: Updated `vercel.json` to use the actual API key value instead of a secret reference, since `NEXT_PUBLIC_` variables are meant to be public.
+
+**Lesson**: When deploying to Vercel, avoid using `@secret_name` references unless the secret is explicitly created in Vercel's Secrets Management panel.
+
+### **Issue 2: Environment Variables Not Injected on Vercel**
+**Problem**: API calls failed despite setting environment variables in Vercel dashboard.
+
+**Solution**: Ensure environment variables are set in **Vercel Project Settings → Environment Variables**, not just in `.env.local`. For Vercel deployments:
+1. Remove hardcoded values from `vercel.json`
+2. Set variables via Vercel Dashboard (Settings → Environment Variables)
+3. Redeploy after changes
+
+---
+
 ## 🧪 Testing
 
 The project includes unit tests for critical UI components and logic using **Vitest** and **React Testing Library**.
